@@ -17,6 +17,10 @@ namespace Math
         ~MolecularManager();
 
         void CreateMolecule(const MoleculeType type, const Vector& position, const Vector& velocity, const double radius, const double massa);
+        
+        void CreateBlueCircleMolecule(const Vector& position);
+        void CreateRedSquareMolecule (const Vector& position);
+        
         void MoveMolecules();
         void DrawMolecules(Graphics::Window& window);
     };

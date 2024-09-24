@@ -25,6 +25,22 @@ void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& pos
     molecule_list_.push_back(new_molecule);
 }
 
+void MolecularManager::CreateBlueCircleMolecule(const Vector& position)
+{
+    double dx = (double)(rand() % 1000) / 100.0;
+    double dy = (double)(rand() % 1000) / 100.0;
+
+    CreateMolecule(MoleculeType::BlueCircle, position, {dx, dy}, 1.0, 1.0);
+}
+
+void MolecularManager::CreateRedSquareMolecule (const Vector& position)
+{
+    double dx = (double)(rand() % 1000) / 100.0;
+    double dy = (double)(rand() % 1000) / 100.0;
+
+    CreateMolecule(MoleculeType::RedSquare, position, {dx, dy}, 1.5, 2.25);
+}
+
 static long long GetTime()
 {
     auto now = std::chrono::system_clock::now();
