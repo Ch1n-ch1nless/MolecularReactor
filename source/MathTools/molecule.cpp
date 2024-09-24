@@ -86,18 +86,18 @@ static void CalculateFinalPulse(const double massa1, Vector& velocity1,
     velocity2 = (2.0 * massa1 * old_velocity1 - (massa2 - massa1) * old_velocity2) / (massa1 + massa2) ;
 }
 
-void Math::Collide(Molecule &molecule1, Molecule &molecule2)
+void Math::Collide(Molecule* molecule1, Molecule* molecule2)
 {
-    Vector x_axis = molecule2.pos_ - molecule1.pos_;
+    Vector x_axis = molecule2->pos_ - molecule1->pos_;
 
-    Vector velocity1_x = GetProjection(x_axis, molecule1.velocity_);
-    Vector velocity1_y = molecule1.velocity_ - velocity1_x;
+    Vector velocity1_x = GetProjection(x_axis, molecule1->velocity_);
+    Vector velocity1_y = molecule1->velocity_ - velocity1_x;
 
-    Vector velocity2_x = GetProjection(x_axis, molecule2.velocity_);
-    Vector velocity2_y = molecule2.velocity_ - velocity2_x;
+    Vector velocity2_x = GetProjection(x_axis, molecule2->velocity_);
+    Vector velocity2_y = molecule2->velocity_ - velocity2_x;
 
-    CalculateFinalPulse(molecule1.massa_, velocity1_x, molecule2.massa_, velocity2_x);
+    CalculateFinalPulse(molecule1->massa_, velocity1_x, molecule2->massa_, velocity2_x);
 
-    molecule1.velocity_ = velocity1_x + velocity1_y;
-    molecule2.velocity_ = velocity2_x + velocity2_y;
+    molecule1->velocity_ = velocity1_x + velocity1_y;
+    molecule2->velocity_ = velocity2_x + velocity2_y;
 }

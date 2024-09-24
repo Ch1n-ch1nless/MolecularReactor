@@ -9,20 +9,22 @@ namespace Math
     class MolecularManager
     {
     private:
-        std::list<Molecule*> molecule_list_;
-        long long            cur_time_;
+        std::vector<Molecule*>  molecule_list_;
+        Vector                  spawn_point_; 
+        long long               cur_time_;
 
     public:
-        MolecularManager();
+        MolecularManager(const Vector& spawn_point);
         ~MolecularManager();
 
-        void CreateMolecule(const MoleculeType type, const Vector& position, const Vector& velocity, const double radius, const double massa);
+        void CreateMolecule(const MoleculeType type, const Vector& velocity, const double radius, const double massa);
         
-        void CreateBlueCircleMolecule(const Vector& position);
-        void CreateRedSquareMolecule (const Vector& position);
+        void CreateBlueCircleMolecule();
+        void CreateRedSquareMolecule ();
         
         void MoveMolecules();
         void DrawMolecules(Graphics::Window& window);
+        void CollideMolecules();
     };
 } // namespace Math 
 

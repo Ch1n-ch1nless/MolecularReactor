@@ -37,7 +37,7 @@ namespace Math
 
         bool operator ==(const Molecule& other);
 
-        friend void Collide(Molecule& molecule1, Molecule& molecule2);
+        friend void Collide(Molecule* molecule1, Molecule* molecule2);
         
         friend class Wall;
     };

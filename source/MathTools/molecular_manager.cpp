@@ -5,8 +5,9 @@
 using namespace Math;
 using namespace Graphics;
 
-MolecularManager::MolecularManager() :
+MolecularManager::MolecularManager(const Vector& spawn_point) :
     molecule_list_(),
+    spawn_point_  (spawn_point),
     cur_time_     (0ll)
 {
 }
@@ -19,26 +20,26 @@ MolecularManager::~MolecularManager()
     }
 }
 
-void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& position, const Vector& velocity, const double radius, const double massa)
+void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& velocity, const double radius, const double massa)
 {
-    Molecule* new_molecule = new Molecule(position, velocity, type, radius, massa);
+    Molecule* new_molecule = new Molecule(spawn_point_, velocity, type, radius, massa);
     molecule_list_.push_back(new_molecule);
 }
 
-void MolecularManager::CreateBlueCircleMolecule(const Vector& position)
+void MolecularManager::CreateBlueCircleMolecule()
 {
     double dx = (double)(rand() % 1000) / 100.0;
     double dy = (double)(rand() % 1000) / 100.0;
 
-    CreateMolecule(MoleculeType::BlueCircle, position, {dx, dy}, 1.0, 1.0);
+    CreateMolecule(MoleculeType::BlueCircle, {dx, dy}, 1.0, 1.0);
 }
 
-void MolecularManager::CreateRedSquareMolecule (const Vector& position)
+void MolecularManager::CreateRedSquareMolecule ()
 {
     double dx = (double)(rand() % 1000) / 100.0;
     double dy = (double)(rand() % 1000) / 100.0;
 
-    CreateMolecule(MoleculeType::RedSquare, position, {dx, dy}, 1.5, 2.25);
+    CreateMolecule(MoleculeType::RedSquare, {dx, dy}, 1.5, 2.25);
 }
 
 static long long GetTime()
@@ -66,5 +67,19 @@ void MolecularManager::DrawMolecules(Window& window)
     for (Molecule* molecule_ptr : molecule_list_)
     {
         molecule_ptr->Draw(window);
+    }
+}
+
+void MolecularManager::CollideMolecules()
+{
+    for (std::size_t i = 1; i < molecule_list_.size(); ++i)
+    {
+        for (std::size_t j = 0; j < i; ++j)
+        {
+            if (*(molecule_list_[i]) == *(molecule_list_[j]))
+            {
+                Collide(molecule_list_[i], molecule_list_[j]);
+            }
+        }
     }
 }
