@@ -24,6 +24,8 @@ namespace Math
         bool operator ==(const AMolecule& other);
 
         friend void Collide(AMolecule& molecule1, AMolecule& molecule2);
+        
+        friend class Wall;
     };
 
 } // namespace Math
