@@ -1,33 +1,73 @@
-#include "abstract_molecule.hpp"
+#include "molecule.hpp"
+
+#include <cassert>
 
 using namespace Math;
 
-AMolecule::AMolecule(const Vector& position, const double radius) :
+Molecule::Molecule(const Vector& position, const MoleculeType type, const double radius, const double massa) :
     pos_      (position),
     velocity_ (),
     radius_   (radius),
-    massa_    (1.0)
+    massa_    (massa),
+    type_     (type),
+    sprite_   ()
 {
+    switch (type_)
+    {
+    case MoleculeType::BlueCircle:
+        sprite_.LoadFromFile(BLUE_CIRCLE_IMAGE);
+        break;
+
+    case MoleculeType::RedSquare:
+        sprite_.LoadFromFile(RED_SQUARE_IMAGE);
+        break;
+    
+    default:
+        assert(false);
+        break;
+    }
 }
 
-AMolecule::AMolecule(const Vector& position, const Vector& velocity, const double radius, const double massa) :
+Molecule::Molecule(const Vector& position, const Vector& velocity, const MoleculeType type, const double radius, const double massa) :
     pos_      (position),
     velocity_ (velocity),
     radius_   (radius),
-    massa_    (massa)
+    massa_    (massa),
+    type_     (type),
+    sprite_   ()
 {
+    switch (type_)
+    {
+    case MoleculeType::BlueCircle:
+        sprite_.LoadFromFile(BLUE_CIRCLE_IMAGE);
+        break;
+
+    case MoleculeType::RedSquare:
+        sprite_.LoadFromFile(RED_SQUARE_IMAGE);
+        break;
+    
+    default:
+        assert(false);
+        break;
+    }
 }
 
-void AMolecule::Move(double dt)
+void Molecule::Move(double dt)
 {
     pos_ += (velocity_ * dt);
 }
 
-bool AMolecule::operator ==(const AMolecule& other)
+bool Molecule::operator ==(const Molecule& other)
 {
     double distance = (pos_ - other.pos_).Length();
 
     return distance < (radius_ + other.radius_);
+}
+
+void Molecule::Draw(Graphics::Window& window)
+{
+    sprite_.SetPosition(pos_);
+    window.Draw(sprite_);
 }
 
 static Vector GetProjection(const Vector& axis, const Vector& vector)
@@ -46,7 +86,7 @@ static void CalculateFinalPulse(const double massa1, Vector& velocity1,
     velocity2 = (2.0 * massa1 * old_velocity1 - (massa2 - massa1) * old_velocity2) / (massa1 + massa2) ;
 }
 
-void Math::Collide(AMolecule &molecule1, AMolecule &molecule2)
+void Math::Collide(Molecule &molecule1, Molecule &molecule2)
 {
     Vector x_axis = molecule2.pos_ - molecule1.pos_;
 
