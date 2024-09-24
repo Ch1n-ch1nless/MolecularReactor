@@ -8,38 +8,36 @@ namespace Math
     class Vector
     {
     private:
-        double x_, y_, z_;
+        double x_, y_;
 
     public:
-        Vector(double x, double y, double z) :
-            x_(x), y_(y), z_(z)
+        Vector(double x, double y) :
+            x_(x), y_(y)
         {
         }
 
         Vector(const Vector& begin, const Vector& end) :
-            x_(end.x_ - begin.x_), y_(end.y_ - begin.y_), z_(end.z_ - begin.z_)
+            x_(end.x_ - begin.x_), y_(end.y_ - begin.y_)
         {
         }
 
         Vector(const Vector& vector) :
-            x_(vector.x_), y_(vector.y_), z_(vector.z_)
+            x_(vector.x_), y_(vector.y_)
         {
         }
 
-        Vector() : x_(0.0), y_(0.0), z_(0.0) {}
+        Vector() : x_(0.0), y_(0.0) {}
 
         ~Vector() = default;
 
         double GetX() const { return x_; }
         double GetY() const { return y_; }
-        double GetZ() const { return z_; }
 
         void SetX(double x) { x_ = x; }
         void SetY(double y) { y_ = y; }
-        void SetZ(double z) { z_ = z; }
 
-        double Length2() { return x_ * x_ + y_ * y_ + z_ * z_; }
-        double Length()  { return sqrt(Length2()); }
+        double Length2() const { return x_ * x_ + y_ * y_; }
+        double Length()  const { return sqrt(Length2()); }
 
         void Normalize()
         {
@@ -47,7 +45,6 @@ namespace Math
 
             x_ /= len;
             y_ /= len;
-            z_ /= len;
         }
 
         Vector& operator =(const Vector& vec);
@@ -62,7 +59,9 @@ namespace Math
     double  operator *(const Vector& left,   const Vector& right);
     Vector  operator *(const Vector& src,    const double  scalar);
     Vector  operator *(const double  scalar, const Vector& src);
+    Vector  operator /(const Vector& src,    const double scalar);
+
 } // namespace Math
 
 
-#endif
+#endif //MOLECULAR_REACTOR_MATH_VECTOR_HPP
