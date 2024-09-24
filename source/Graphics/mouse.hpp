@@ -18,6 +18,7 @@ namespace Graphics
         ~Mouse();
 
         Math::Vector GetMouseCoords(Window& window);
+        Math::Vector GetMouseCoords() const;
     };
     
 } // namespace Graphics

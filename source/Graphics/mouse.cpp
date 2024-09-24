@@ -20,3 +20,8 @@ Vector Mouse::GetMouseCoords(Window& window)
     sf::Vector2i sf_mouse_pos = mouse_.getPosition(window.window_);
     return Vector((double)sf_mouse_pos.x, (double)sf_mouse_pos.y);
 }
+
+Vector Mouse::GetMouseCoords() const
+{
+    return pos_;
+}
