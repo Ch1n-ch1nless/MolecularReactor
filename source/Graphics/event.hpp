@@ -9,10 +9,8 @@ namespace Graphics
     {
         None,
         WindowClosed,
-        MouseLeftButtonPressed,
-        MouseLeftButtonReleased,
-        MouseRightButtonPressed,
-        MouseRightButtonReleased,
+        MouseButtonPressed,
+        MouseButtonReleased,
         MouseMoved,
     };
 
@@ -36,6 +34,8 @@ namespace Graphics
         }
         
         ~Event() = default;
+
+        friend class Window;
     };
 } // namespace Graphics
 
