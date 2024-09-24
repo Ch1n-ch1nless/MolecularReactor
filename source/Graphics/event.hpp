@@ -18,18 +18,19 @@ namespace Graphics
     {
     private:
         sf::Event event_;
-        EventType type_;
 
     public:
+        EventType type;
+
         Event() :
             event_(),
-            type_(EventType::None)
+            type(EventType::None)
         {
         }
 
-        Event(EventType type) :
+        Event(EventType event_type) :
             event_(),
-            type_(type)
+            type(event_type)
         {
         }
         

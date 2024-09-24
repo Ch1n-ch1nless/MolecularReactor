@@ -38,23 +38,23 @@ bool Window::PollEvent(Event& event)
 
     if (secret_event.type == sf::Event::Closed)
     {
-        event.type_ = EventType::WindowClosed;
+        event.type = EventType::WindowClosed;
     }
     else if (secret_event.type == sf::Event::MouseMoved)
     {
-        event.type_ = EventType::MouseMoved;
+        event.type = EventType::MouseMoved;
     }
     else if (secret_event.type == sf::Event::MouseButtonPressed)
     {
-        event.type_ = EventType::MouseButtonPressed;
+        event.type = EventType::MouseButtonPressed;
     }
     else if (secret_event.type == sf::Event::MouseButtonReleased)
     {
-        event.type_ = EventType::MouseButtonReleased;
+        event.type = EventType::MouseButtonReleased;
     }
     else
     {
-        event.type_ = EventType::None;
+        event.type = EventType::None;
     }
 
     return result;
