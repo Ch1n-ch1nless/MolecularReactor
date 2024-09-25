@@ -2,6 +2,7 @@
 #define MOLECULAR_REACTOR_MATH_MOLECULAR_MANAGER
 
 #include "molecule.hpp"
+#include "walls.hpp"
 #include <list>
 
 namespace Math
@@ -25,6 +26,7 @@ namespace Math
         void MoveMolecules();
         void DrawMolecules(Graphics::Window& window);
         void CollideMolecules();
+        void CollideMolecules(Walls& walls);
     };
 } // namespace Math 
 

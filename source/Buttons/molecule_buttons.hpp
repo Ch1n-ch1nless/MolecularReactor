@@ -14,9 +14,12 @@ namespace GUI
 
     public:
         AddBlueCircleMoleculesButton(const Math::Vector& position, Math::MolecularManager* manager_ptr);
+        AddBlueCircleMoleculesButton(const AddBlueCircleMoleculesButton& other);
         
         ~AddBlueCircleMoleculesButton() = default;
 
+        AddBlueCircleMoleculesButton& operator =(const AddBlueCircleMoleculesButton& other);
+        
         void Act();
     };
 
@@ -27,8 +30,11 @@ namespace GUI
 
     public:
         AddRedSquareMoleculesButton(const Math::Vector& position, Math::MolecularManager* manager_ptr);
+        AddRedSquareMoleculesButton(const AddRedSquareMoleculesButton& other);
         
         ~AddRedSquareMoleculesButton() = default;
+
+        AddRedSquareMoleculesButton& operator =(const AddRedSquareMoleculesButton& other);
 
         void Act();
     };

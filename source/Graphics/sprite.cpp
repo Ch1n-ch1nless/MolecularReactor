@@ -9,6 +9,23 @@ Sprite::Sprite() :
 {
 }
 
+Sprite::~Sprite()
+{
+}
+
+Sprite::Sprite(const Sprite& other) :
+    texture_(other.texture_),
+    sprite_ (other.sprite_)
+{
+}
+
+Sprite& Sprite::operator =(const Sprite& sprite)
+{
+    texture_ = sprite.texture_;
+    sprite_  = sprite.sprite_;
+    return *this;
+}
+
 bool Sprite::LoadFromFile(const char* const filename)
 {
     if (texture_.loadFromFile(filename))

@@ -18,6 +18,19 @@ using namespace Math;
     }
 }
 
+Button::Button(const Button& other) :
+    top_left_corner_(other.top_left_corner_),
+    width_          (other.width_),
+    height_         (other.height_),
+    state_          (other.state_),
+    sprites_        ()
+{
+    for (unsigned int i = 0; i < (unsigned int)State::MaxNumberOfStates; ++i)
+    {
+        sprites_[i] = other.sprites_[i];
+    }
+}
+
 bool Button::IsMouseOnButton(const Graphics::Mouse& mouse)
 {
     double x0 = top_left_corner_.GetX();

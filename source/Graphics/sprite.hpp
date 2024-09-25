@@ -14,7 +14,11 @@ namespace Graphics
 
     public:
         Sprite();
-        ~Sprite() = default;
+        ~Sprite();
+
+        Sprite(const Sprite& other);
+
+        Sprite& operator =(const Sprite& sprite);
 
         bool LoadFromFile(const char* const filename);
         void SetPosition(const Math::Vector& top_left_corner);

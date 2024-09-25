@@ -47,7 +47,7 @@ int ButtonManager::CheckMouse(Window& window, Mouse& mouse)
     return -1;
 }
 
-bool ButtonManager::ManageEvents(Window& window, const Event& event, Mouse& mouse)
+bool ButtonManager::ManageEvents(Window& window, Event& event, Mouse& mouse)
 {
     for (Button* button : buttons_array_)
     {

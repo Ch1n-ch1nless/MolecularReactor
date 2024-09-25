@@ -30,6 +30,7 @@ namespace GUI
 
     public:
         Button(const Math::Vector& position, double width, double height, char const * const * const file_names);
+        Button(const Button& other);
         
         virtual ~Button() = default;
 

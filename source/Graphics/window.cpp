@@ -31,7 +31,7 @@ void Window::Display()
 
 bool Window::PollEvent(Event& event)
 {
-    sf::Event secret_event  = event.event_;
+    sf::Event& secret_event = event.event_;
     bool result             = window_.pollEvent(secret_event);
 
     if (!result) return result;

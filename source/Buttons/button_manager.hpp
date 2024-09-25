@@ -20,9 +20,9 @@ namespace GUI
 
         void DrawButtons(Graphics::Window& window);
 
-        bool ManageEvents(      Graphics::Window& window, 
-                          const Graphics::Event&  event, 
-                                Graphics::Mouse& mouse     );
+        bool ManageEvents(Graphics::Window& window, 
+                          Graphics::Event&  event, 
+                          Graphics::Mouse& mouse     );
 
         int  CheckMouse( Graphics::Window& window, 
                          Graphics::Mouse& mouse    );

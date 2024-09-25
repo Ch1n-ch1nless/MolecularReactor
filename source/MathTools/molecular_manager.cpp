@@ -1,6 +1,7 @@
 #include "molecular_manager.hpp"
 
 #include <chrono>
+#include <cstdio>
 
 using namespace Math;
 using namespace Graphics;
@@ -28,18 +29,18 @@ void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& vel
 
 void MolecularManager::CreateBlueCircleMolecule()
 {
-    double dx = (double)(rand() % 1000) / 100.0;
-    double dy = (double)(rand() % 1000) / 100.0;
+    double dx = (double)(rand() % 1001 - 500) / 20.0;
+    double dy = (double)(rand() % 1001 - 500) /20.0;
 
-    CreateMolecule(MoleculeType::BlueCircle, {dx, dy}, 1.0, 1.0);
+    CreateMolecule(MoleculeType::BlueCircle, {dx, dy}, 8.0, 64.0);
 }
 
 void MolecularManager::CreateRedSquareMolecule ()
 {
-    double dx = (double)(rand() % 1000) / 100.0;
-    double dy = (double)(rand() % 1000) / 100.0;
+    double dx = (double)(rand() % 1001 - 500) / 20.0;
+    double dy = (double)(rand() % 1001 - 500) / 20.0;
 
-    CreateMolecule(MoleculeType::RedSquare, {dx, dy}, 1.5, 2.25);
+    CreateMolecule(MoleculeType::RedSquare, {dx, dy}, 11.3, 121.0);
 }
 
 static long long GetTime()
@@ -81,5 +82,13 @@ void MolecularManager::CollideMolecules()
                 Collide(molecule_list_[i], molecule_list_[j]);
             }
         }
+    }
+}
+
+void MolecularManager::CollideMolecules(Walls& walls)
+{
+    for (std::size_t i = 0; i < molecule_list_.size(); ++i)
+    {
+        walls.CheckCollision(*(molecule_list_[i]));
     }
 }
