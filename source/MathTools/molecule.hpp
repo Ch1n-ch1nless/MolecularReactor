@@ -42,6 +42,8 @@ namespace Math
         friend class Wall;
     };
 
+    void Collide(Molecule* molecule1, Molecule* molecule2);
+
 } // namespace Math
 
 #endif //MOLECULAR_REACTOR_MATH_MOLECULE_HPP

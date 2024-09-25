@@ -4,7 +4,7 @@ using namespace Graphics;
 
 
 Window::Window(std::size_t width, std::size_t height, const char* const window_name) :
-    window_(sf::VideoMode(width, height), window_name),
+    window_(sf::VideoMode((unsigned int)width, (unsigned int)height), window_name),
     width_ (width),
     height_(height)
 {

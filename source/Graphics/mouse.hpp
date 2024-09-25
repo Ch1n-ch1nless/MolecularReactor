@@ -15,7 +15,7 @@ namespace Graphics
     public:
         Mouse();
         Mouse(const Math::Vector& position);
-        ~Mouse();
+        ~Mouse() = default;
 
         Math::Vector GetMouseCoords(Window& window);
         Math::Vector GetMouseCoords() const;

@@ -2,7 +2,7 @@
 #define MOLECULAR_REACTOR_MATH_WALLS_HPP
 
 #include "vector.hpp"
-#include "abstract_molecule.hpp"
+#include "molecule.hpp"
 
 namespace Math
 {
@@ -19,9 +19,9 @@ namespace Math
 
         ~Wall() = default;
 
-        bool operator==(const AMolecule& molecule) const;
+        bool operator==(const Molecule& molecule) const;
 
-        void Collide(AMolecule& molecule) const;
+        void Collide(Molecule& molecule) const;
     };
 
     class Walls
@@ -38,7 +38,7 @@ namespace Math
 
         ~Walls() = default;
 
-        void CheckCollision(AMolecule& molecule);
+        void CheckCollision(Molecule& molecule);
     };
 
 } // namespace Math

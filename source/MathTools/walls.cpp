@@ -20,7 +20,7 @@ Wall::Wall(const double x_begin, const double y_begin, const double x_end, const
     normal_.Normalize();
 }
 
-bool Wall::operator==(const AMolecule& molecule) const
+bool Wall::operator==(const Molecule& molecule) const
 {
     Vector new_pos = molecule.pos_ - molecule.radius_ * normal_;
 
@@ -33,7 +33,7 @@ bool Wall::operator==(const AMolecule& molecule) const
     return false;
 }
 
-void Wall::Collide(AMolecule& molecule) const
+void Wall::Collide(Molecule& molecule) const
 {
     Vector projection_vec = (molecule.velocity_ * normal_) * normal_;
     molecule.velocity_ -= 2 * projection_vec;
@@ -67,7 +67,7 @@ Walls::Walls(const Vector& top_left_corner, const double width, const double hei
 {
 }
 
-void Walls::CheckCollision(AMolecule& molecule)
+void Walls::CheckCollision(Molecule& molecule)
 {
     for (int i = 0; i < 4; ++i)
     {

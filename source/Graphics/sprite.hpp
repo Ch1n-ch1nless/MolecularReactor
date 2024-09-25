@@ -13,7 +13,7 @@ namespace Graphics
         sf::Sprite  sprite_;
 
     public:
-        Sprite()  = default;
+        Sprite();
         ~Sprite() = default;
 
         bool LoadFromFile(const char* const filename);

@@ -3,6 +3,12 @@
 using namespace Graphics;
 using namespace Math;
 
+Sprite::Sprite() :
+    texture_(),
+    sprite_ ()
+{
+}
+
 bool Sprite::LoadFromFile(const char* const filename)
 {
     if (texture_.loadFromFile(filename))

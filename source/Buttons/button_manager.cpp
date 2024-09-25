@@ -39,9 +39,9 @@ int ButtonManager::CheckMouse(Window& window, Mouse& mouse)
 {
     Vector mouse_position = mouse.GetMouseCoords(window);
 
-    for (int index = 0; index < buttons_array_.size(); ++index)
+    for (std::size_t index = 0; index < buttons_array_.size(); ++index)
     {
-        if (buttons_array_[index]->IsMouseOnButton(mouse_position)) return index;
+        if (buttons_array_[index]->IsMouseOnButton(mouse_position)) return (int)index;
     }
 
     return -1;
