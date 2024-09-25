@@ -5,17 +5,18 @@
 #include "Buttons/button_manager.hpp"
 #include "Buttons/molecule_buttons.hpp"
 
+#include <iostream>
+
 int main()
 {
     srand((unsigned int)time(NULL));
 
     Graphics::Window window(1200, 800, "Molecular reactor");
-    Graphics::Event  event = {};
     Graphics::Mouse  mouse = {};
 
     Math::MolecularManager gas_model({400.0, 400.0});
 
-    Math::Walls walls({200.0, 200.0}, 400.0, 400.0);
+    Math::Walls walls({200.0, 200.0}, {600.0, 600.0});
 
     GUI::ButtonManager button_manager;
 
@@ -27,6 +28,8 @@ int main()
 
     while (window.IsOpen())
     {
+        Graphics::Event  event = {};
+
         while (window.PollEvent(event))
         {
             if (event.type == Graphics::EventType::WindowClosed)
@@ -48,7 +51,7 @@ int main()
 
         window.Clear();
 
-        //sf::sleep(sf::seconds(0.3f));
+        //sf::sleep(sf::seconds(0.1f));
     }
     
     

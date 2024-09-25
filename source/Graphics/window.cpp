@@ -34,7 +34,10 @@ bool Window::PollEvent(Event& event)
     sf::Event& secret_event = event.event_;
     bool result             = window_.pollEvent(secret_event);
 
-    if (!result) return result;
+    if (!result) 
+    {
+        return result;
+    }
 
     if (secret_event.type == sf::Event::Closed)
     {
