@@ -50,8 +50,6 @@ int main()
         window.Display();
 
         window.Clear();
-
-        //sf::sleep(sf::seconds(0.1f));
     }
     
     
