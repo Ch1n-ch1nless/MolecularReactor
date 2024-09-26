@@ -47,25 +47,22 @@ bool View::BasicButton::IsMouseOnButton(const Graphics::Mouse& mouse)
             (y0 <= mouse_y && mouse_y <= (y0 + height_));
 }
 
-void View::BasicButton::UpdateButton(const Graphics::Event& event)
+void View::BasicButton::Pressed()
 {
-    switch (event.type)
-    {
-    case Graphics::EventType::MouseButtonPressed :
-        state_ = ButtonStates::Pressed;
-        break;
+    state_ = ButtonStates::Pressed;
+}
 
-    case Graphics::EventType::MouseButtonReleased :
-        state_ = ButtonStates::Released;
-        break;
+void View::BasicButton::Released()
+{
+    state_ = ButtonStates::Released;
+}
 
-    case Graphics::EventType::MouseMoved:
-    case Graphics::EventType::None:
-        state_ = ButtonStates::Hovered;
-        break;
-    
-    case Graphics::EventType::WindowClosed:
-    default:
-        break;
-    }
+void View::BasicButton::Hovered()
+{
+    state_ = ButtonStates::Hovered;
+}
+
+void View::BasicButton::UnHovered()
+{
+    state_ = ButtonStates::Normal;
 }

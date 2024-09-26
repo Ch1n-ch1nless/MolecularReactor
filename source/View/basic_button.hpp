@@ -35,7 +35,10 @@ namespace View
 
         bool IsMouseOnButton(const Graphics::Mouse& mouse);
 
-        void UpdateButton(const Graphics::Event& event);
+        void Pressed  ();
+        void Released ();
+        void Hovered  ();
+        void UnHovered();
     };
 }
 
