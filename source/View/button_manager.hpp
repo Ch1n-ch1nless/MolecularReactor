@@ -16,6 +16,8 @@ namespace View
          ButtonManager(std::vector<BasicButton*>& src_array);
         ~ButtonManager();
 
+        void AddButton(BasicButton* new_button);
+
         void ManageEvents(Graphics::Event& event, Graphics::Mouse& mouse);
     };
 }

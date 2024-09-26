@@ -10,6 +10,19 @@ View::ButtonManager::ButtonManager(std::vector<BasicButton*>& src_array) :
 {
 }
 
+View::ButtonManager::~ButtonManager()
+{
+    for (View::BasicButton* button : buttons_array_)
+    {
+        delete button;
+    }
+}
+
+void View::ButtonManager::AddButton(BasicButton* new_button)
+{
+    buttons_array_.push_back(new_button);
+}
+
 void View::ButtonManager::ManageEvents(Graphics::Event& event, Graphics::Mouse& mouse)
 {
     for (View::BasicButton* button : buttons_array_)
