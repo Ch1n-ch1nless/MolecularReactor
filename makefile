@@ -17,8 +17,8 @@ MATH_TOOLS_OBJ_DIR = ./object/MathTools/
 MAIN_SRC = ./source/main.cpp
 MAIN_OBJ = ./object/main.o
 
-BUTTONS_SRC_DIR = ./source/Buttons/
-BUTTONS_OBJ_DIR = ./object/Buttons/
+VIEW_SRC_DIR = ./source/View/
+VIEW_OBJ_DIR = ./object/View/
 
 GRAPHICS_SRC = $(wildcard $(GRAPHICS_SRC_DIR)*.cpp)
 GRAPHICS_OBJ = $(patsubst $(GRAPHICS_SRC_DIR)%.cpp, $(GRAPHICS_OBJ_DIR)%.o, $(GRAPHICS_SRC))
@@ -26,13 +26,13 @@ GRAPHICS_OBJ = $(patsubst $(GRAPHICS_SRC_DIR)%.cpp, $(GRAPHICS_OBJ_DIR)%.o, $(GR
 MATH_TOOLS_SRC = $(wildcard $(MATH_TOOLS_SRC_DIR)*.cpp)
 MATH_TOOLS_OBJ = $(patsubst $(MATH_TOOLS_SRC_DIR)%.cpp, $(MATH_TOOLS_OBJ_DIR)%.o, $(MATH_TOOLS_SRC))
 
-BUTTONS_SRC = $(wildcard $(BUTTONS_SRC_DIR)*.cpp)
-BUTTONS_OBJ = $(patsubst $(BUTTONS_SRC_DIR)%.cpp, $(BUTTONS_OBJ_DIR)%.o, $(BUTTONS_SRC))
+VIEW_SRC = $(wildcard $(VIEW_SRC_DIR)*.cpp)
+VIEW_OBJ = $(patsubst $(VIEW_SRC_DIR)%.cpp, $(VIEW_OBJ_DIR)%.o, $(VIEW_SRC))
 
 all: link
 
-link: $(GRAPHICS_OBJ) $(BUTTONS_OBJ) $(MATH_TOOLS_OBJ) ./object/main.o
-	$(CC) ./object/main.o $(GRAPHICS_OBJ) $(BUTTONS_OBJ) $(MATH_TOOLS_OBJ) -o gas_model.out -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+link: $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) ./object/main.o
+	$(CC) ./object/main.o $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) -o gas_model.out -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 $(GRAPHICS_OBJ_DIR)%.o : $(GRAPHICS_SRC_DIR)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -40,11 +40,11 @@ $(GRAPHICS_OBJ_DIR)%.o : $(GRAPHICS_SRC_DIR)%.cpp
 $(MATH_TOOLS_OBJ_DIR)%.o : $(MATH_TOOLS_SRC_DIR)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUTTONS_OBJ_DIR)%.o : $(BUTTONS_SRC_DIR)%.cpp
+$(VIEW_OBJ_DIR)%.o : $(VIEW_SRC_DIR)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(MAIN_OBJ) : $(MAIN_SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(GRAPHICS_OBJ) $(MATH_TOOLS_OBJ) $(BUTTONS_OBJ) $(MAIN_OBJ)
+	rm $(GRAPHICS_OBJ) $(MATH_TOOLS_OBJ) $(VIEW_OBJ) $(MAIN_OBJ)
