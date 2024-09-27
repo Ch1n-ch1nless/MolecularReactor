@@ -2,21 +2,10 @@
 #define MOLECULAR_REACTOR_MATH_MOLECULE_HPP
 
 #include "vector.hpp"
-#include "../Graphics/window.hpp"
+#include "molecule_types.hpp"
 
 namespace Math
 {
-    enum class MoleculeType : unsigned int
-    {
-        BlueCircle = 0,
-        RedSquare  = 1,
-
-        MaxNumberOfTypes
-    };
-
-    const char* const BLUE_CIRCLE_IMAGE = "pictures/blue_circle_16_16.png";
-    const char* const RED_SQUARE_IMAGE  = "pictures/red_square_16_16.png";
-
     class Molecule
     {
     protected:
@@ -25,19 +14,28 @@ namespace Math
         double              radius_;
         double              massa_;
         MoleculeType        type_;
-        Graphics::Sprite    sprite_;
 
     public:
-        Molecule(const Vector& position, const MoleculeType type, const double radius, const double massa);
-        Molecule(const Vector& position, const Vector& velocity, const MoleculeType type, const double radius, const double massa);
+        Molecule(const Vector& position, const MoleculeType type, const double massa);
+        Molecule(const Vector& position, const Vector& velocity, const MoleculeType type, const double massa);
 
         virtual ~Molecule() = default;
 
-        void Draw(Graphics::Window& window);
-
         void Move(double dt);
 
-        MoleculeType GetType() const { return type_; }
+        MoleculeType GetType() const;
+
+        double GetMassa() const;
+        void   SetMassa(double massa);
+
+        double GetRadius() const;
+
+        double GetEnergy() const;
+
+        const Vector& GetVelocity() const;
+        void          SetVelocity(const Vector& new_velocity);
+
+        const Vector& GetPosition() const;
 
         bool operator ==(const Molecule& other);
 

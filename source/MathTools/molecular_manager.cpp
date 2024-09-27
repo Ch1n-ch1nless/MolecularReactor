@@ -4,12 +4,13 @@
 #include <cstdio>
 
 using namespace Math;
-using namespace Graphics;
 
 MolecularManager::MolecularManager(const Vector& spawn_point) :
-    molecule_list_(),
-    spawn_point_  (spawn_point),
-    cur_time_     (0ll)
+    chemical_engine_ (),
+    physical_engine_ (&chemical_engine_),
+    molecule_list_   (),
+    spawn_point_     (spawn_point),
+    cur_time_        (0ll)
 {
 }
 
@@ -21,74 +22,41 @@ MolecularManager::~MolecularManager()
     }
 }
 
-void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& velocity, const double radius, const double massa)
+void MolecularManager::CreateMolecule(const MoleculeType type, const Vector& velocity, const double massa)
 {
-    Molecule* new_molecule = new Molecule(spawn_point_, velocity, type, radius, massa);
+    Molecule* new_molecule = new Molecule(spawn_point_, velocity, type, massa);
     molecule_list_.push_back(new_molecule);
 }
 
-void MolecularManager::CreateBlueCircleMolecule()
+void MolecularManager::AddMolecule(Molecule* new_molecule)
 {
-    double dx = (double)(rand() % 1001 - 500) / 20.0;
-    double dy = (double)(rand() % 1001 - 500) /20.0;
-
-    CreateMolecule(MoleculeType::BlueCircle, {dx, dy}, 8.0, 64.0);
+    molecule_list_.push_back(new_molecule);
 }
 
-void MolecularManager::CreateRedSquareMolecule ()
-{
-    double dx = (double)(rand() % 1001 - 500) / 20.0;
-    double dy = (double)(rand() % 1001 - 500) / 20.0;
-
-    CreateMolecule(MoleculeType::RedSquare, {dx, dy}, 11.3, 121.0);
-}
-
-static long long GetTime()
+static double GetTime(long long& old_time)
 {
     auto now = std::chrono::system_clock::now();
+    long long new_time = std::chrono::duration_cast<std::chrono::milliseconds>( now.time_since_epoch()).count();
 
-    return std::chrono::duration_cast<std::chrono::milliseconds>( now.time_since_epoch()).count();
+    double dt = static_cast<double>(new_time - old_time) / 1000.0;
+    old_time = new_time;
+
+    return dt;
 }
 
-void MolecularManager::MoveMolecules()
+void MolecularManager::LaunchPhysicalEngine(Walls& walls)
 {
-    long long new_time = GetTime();
-    double    dt       = (double)(new_time - cur_time_) / 1000.0;
+    physical_engine_.UpdateMoleculeData(&molecule_list_);
 
-    for (Molecule* molecule_ptr : molecule_list_)
-    {
-        molecule_ptr->Move(dt);
-    }
+    double dt = GetTime(cur_time_);
 
-    cur_time_ = new_time;
+    physical_engine_.MoveMolecules(dt);
+
+    physical_engine_.CollideMolecules();
+    physical_engine_.CollideMolecules(walls);
 }
 
-void MolecularManager::DrawMolecules(Window& window)
+std::vector<Molecule*>* MolecularManager::GetUpdatedMoleculeData()
 {
-    for (Molecule* molecule_ptr : molecule_list_)
-    {
-        molecule_ptr->Draw(window);
-    }
-}
-
-void MolecularManager::CollideMolecules()
-{
-    for (std::size_t i = 1; i < molecule_list_.size(); ++i)
-    {
-        for (std::size_t j = 0; j < i; ++j)
-        {
-            if (*(molecule_list_[i]) == *(molecule_list_[j]))
-            {
-                Collide(molecule_list_[i], molecule_list_[j]);
-            }
-        }
-    }
-}
-
-void MolecularManager::CollideMolecules(Walls& walls)
-{
-    for (std::size_t i = 0; i < molecule_list_.size(); ++i)
-    {
-        walls.CheckCollision(*(molecule_list_[i]));
-    }
+    return &molecule_list_;
 }

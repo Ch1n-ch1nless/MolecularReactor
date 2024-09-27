@@ -4,52 +4,22 @@
 
 using namespace Math;
 
-Molecule::Molecule(const Vector& position, const MoleculeType type, const double radius, const double massa) :
+Molecule::Molecule(const Vector& position, const MoleculeType type, const double massa) :
     pos_      (position),
     velocity_ (),
-    radius_   (radius),
+    radius_   (sqrt(massa)),
     massa_    (massa),
-    type_     (type),
-    sprite_   ()
+    type_     (type)
 {
-    switch (type_)
-    {
-    case MoleculeType::BlueCircle:
-        sprite_.LoadFromFile(BLUE_CIRCLE_IMAGE);
-        break;
-
-    case MoleculeType::RedSquare:
-        sprite_.LoadFromFile(RED_SQUARE_IMAGE);
-        break;
-    
-    default:
-        assert(false);
-        break;
-    }
 }
 
-Molecule::Molecule(const Vector& position, const Vector& velocity, const MoleculeType type, const double radius, const double massa) :
+Molecule::Molecule(const Vector& position, const Vector& velocity, const MoleculeType type, const double massa) :
     pos_      (position),
     velocity_ (velocity),
-    radius_   (radius),
+    radius_   (sqrt(massa)),
     massa_    (massa),
-    type_     (type),
-    sprite_   ()
+    type_     (type)
 {
-    switch (type_)
-    {
-    case MoleculeType::BlueCircle:
-        sprite_.LoadFromFile(BLUE_CIRCLE_IMAGE);
-        break;
-
-    case MoleculeType::RedSquare:
-        sprite_.LoadFromFile(RED_SQUARE_IMAGE);
-        break;
-    
-    default:
-        assert(false);
-        break;
-    }
 }
 
 void Molecule::Move(double dt)
@@ -57,17 +27,53 @@ void Molecule::Move(double dt)
     pos_ += (velocity_ * dt);
 }
 
+MoleculeType Molecule::GetType() const
+{
+    return type_;
+}
+
+double Molecule::GetMassa() const
+{
+    return massa_;
+}
+
+double Molecule::GetRadius() const
+{
+    return radius_;
+}
+
+double Molecule::GetEnergy() const
+{
+    return massa_ * velocity_.Length2() / 2.0;
+}
+
+void Molecule::SetMassa(double massa)
+{
+    massa_  = massa;
+    radius_ = sqrt(massa);
+}
+
+const Vector& Molecule::GetVelocity() const
+{
+    return velocity_;
+}
+
+void Molecule::SetVelocity(const Vector& new_velocity)
+{
+    velocity_ = new_velocity;
+}
+
+const Vector& Molecule::GetPosition() const
+{
+    return pos_;
+}
+
+
 bool Molecule::operator ==(const Molecule& other)
 {
     double distance = (pos_ - other.pos_).Length();
 
     return distance < (radius_ + other.radius_);
-}
-
-void Molecule::Draw(Graphics::Window& window)
-{
-    sprite_.SetPosition(pos_);
-    window.Draw(sprite_);
 }
 
 static Vector GetProjection(const Vector& axis, const Vector& vector)

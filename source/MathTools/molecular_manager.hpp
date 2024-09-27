@@ -2,14 +2,18 @@
 #define MOLECULAR_REACTOR_MATH_MOLECULAR_MANAGER
 
 #include "molecule.hpp"
-#include "walls.hpp"
-#include <list>
+#include "chemistry_engine.hpp"
+#include "physical_engine.hpp"
+#include <vector>
 
 namespace Math
 {
     class MolecularManager
     {
     private:
+        ChemistryEngine         chemical_engine_;
+        PhysicalEngine          physical_engine_;
+
         std::vector<Molecule*>  molecule_list_;
         Vector                  spawn_point_; 
         long long               cur_time_;
@@ -18,15 +22,13 @@ namespace Math
         MolecularManager(const Vector& spawn_point);
         ~MolecularManager();
 
-        void CreateMolecule(const MoleculeType type, const Vector& velocity, const double radius, const double massa);
+        void CreateMolecule(const MoleculeType type, const Vector& velocity, const double massa);
         
-        void CreateBlueCircleMolecule();
-        void CreateRedSquareMolecule ();
+        void AddMolecule(Molecule* molecule);
         
-        void MoveMolecules();
-        void DrawMolecules(Graphics::Window& window);
-        void CollideMolecules();
-        void CollideMolecules(Walls& walls);
+        void LaunchPhysicalEngine(Walls& walls);
+
+        std::vector<Molecule*>* GetUpdatedMoleculeData();
     };
 } // namespace Math 
 
