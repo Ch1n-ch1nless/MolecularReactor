@@ -11,10 +11,9 @@ namespace View
     private:
         const std::vector<Math::Molecule*>*  data_;
         Graphics::Sprite                    sprites_[(unsigned int)Math::MoleculeType::MaxNumberOfTypes];
-        Graphics::Sprite                    background_;
 
     public:
-         FlaskWindow(const std::vector<Math::Molecule*>* molecules_array, const char* const * const molecule_textures, const char* const background);
+         FlaskWindow(const std::vector<Math::Molecule*>* molecules_array, const char* const * const molecule_textures);
         ~FlaskWindow();
 
         void Draw(Graphics::Window& window);

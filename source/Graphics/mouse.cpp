@@ -15,10 +15,11 @@ Mouse::Mouse(const Vector& position) :
 {
 }
 
-Vector Mouse::GetMouseCoords(Window& window)
+void Mouse::UpdateCoords(Window& window)
 {
     sf::Vector2i sf_mouse_pos = mouse_.getPosition(window.window_);
-    return Vector((double)sf_mouse_pos.x, (double)sf_mouse_pos.y);
+    pos_.SetX(sf_mouse_pos.x);
+    pos_.SetY(sf_mouse_pos.y);
 }
 
 Vector Mouse::GetMouseCoords() const

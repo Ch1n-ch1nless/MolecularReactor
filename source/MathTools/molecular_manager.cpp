@@ -14,6 +14,15 @@ MolecularManager::MolecularManager(const Vector& spawn_point) :
 {
 }
 
+MolecularManager::MolecularManager(const MolecularManager& molecular_manager) :
+    chemical_engine_ (molecular_manager.chemical_engine_),
+    physical_engine_ (molecular_manager.physical_engine_),
+    molecule_list_   (molecular_manager.molecule_list_),
+    spawn_point_     (molecular_manager.spawn_point_),
+    cur_time_        (0ll)
+{
+}
+
 MolecularManager::~MolecularManager()
 {
     for (Molecule* molecule : molecule_list_)

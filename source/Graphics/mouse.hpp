@@ -17,7 +17,7 @@ namespace Graphics
         Mouse(const Math::Vector& position);
         ~Mouse() = default;
 
-        Math::Vector GetMouseCoords(Window& window);
+        void         UpdateCoords(Window& window);
         Math::Vector GetMouseCoords() const;
     };
     

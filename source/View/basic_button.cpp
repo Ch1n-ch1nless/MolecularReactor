@@ -43,8 +43,8 @@ bool View::BasicButton::IsMouseOnButton(const Graphics::Mouse& mouse)
     double mouse_x = mouse.GetMouseCoords().GetX();
     double mouse_y = mouse.GetMouseCoords().GetY();
 
-    return  (x0 <= mouse_x && mouse_x <= (x0 + width_ )) &&
-            (y0 <= mouse_y && mouse_y <= (y0 + height_));
+    return  (x0 <= mouse_x && mouse_x <= (x0 + (double)width_ )) &&
+            (y0 <= mouse_y && mouse_y <= (y0 + (double)height_));
 }
 
 void View::BasicButton::Pressed()

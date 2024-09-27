@@ -12,6 +12,12 @@ Math::PhysicalEngine::PhysicalEngine(std::vector<Molecule*>* molecule_array, Che
 {
 }
 
+Math::PhysicalEngine::PhysicalEngine(const PhysicalEngine& physical_engine) :
+    molecule_array_   (physical_engine.molecule_array_),
+    chemistry_engine_ (physical_engine.chemistry_engine_)
+{
+}
+
 Math::PhysicalEngine::~PhysicalEngine()
 {
 }

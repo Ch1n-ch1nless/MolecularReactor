@@ -9,8 +9,10 @@ namespace Math
     class ChemistryEngine
     {
     private:
-        void (table_[(unsigned int)MoleculeType::MaxNumberOfTypes][(unsigned int)MoleculeType::MaxNumberOfTypes])(std::vector<Molecule*>* vector, std::size_t i, std::size_t j);
-
+        void 
+        (*table_[(unsigned int)Math::MoleculeType::MaxNumberOfTypes][(unsigned int)Math::MoleculeType::MaxNumberOfTypes])(  std::vector<Molecule*>*, 
+                                                                                                                            std::size_t, 
+                                                                                                                            std::size_t                 );
     public:
          ChemistryEngine();
         ~ChemistryEngine();

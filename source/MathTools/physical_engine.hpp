@@ -11,8 +11,8 @@ namespace Math
     class PhysicalEngine
     {
     private:
-        std::vector<Molecule*>* molecule_array_;  
-        ChemistryEngine*        chemistry_engine_;
+        std::vector<Molecule*>* molecule_array_   = nullptr;  
+        ChemistryEngine*        chemistry_engine_ = nullptr;
 
         const double kBoltzmann = 1.38;
         const double maxEnergy  = 100.0;
@@ -20,6 +20,7 @@ namespace Math
     public:
          PhysicalEngine(ChemistryEngine* chemistry_engine);
          PhysicalEngine(std::vector<Molecule*>* molecule_array, ChemistryEngine* chemistry_engine);
+         PhysicalEngine(const PhysicalEngine& physical_engine);
         ~PhysicalEngine();
 
         void UpdateMoleculeData(std::vector<Molecule*>* new_data);

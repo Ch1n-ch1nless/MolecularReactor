@@ -20,6 +20,7 @@ namespace Math
 
     public:
         MolecularManager(const Vector& spawn_point);
+        MolecularManager(const MolecularManager& molecular_manager);
         ~MolecularManager();
 
         void CreateMolecule(const MoleculeType type, const Vector& velocity, const double massa);
