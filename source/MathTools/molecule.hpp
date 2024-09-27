@@ -6,10 +6,12 @@
 
 namespace Math
 {
-    enum class MoleculeType
+    enum class MoleculeType : unsigned int
     {
         BlueCircle = 0,
-        RedSquare  = 1
+        RedSquare  = 1,
+
+        MaxNumberOfTypes
     };
 
     const char* const BLUE_CIRCLE_IMAGE = "pictures/blue_circle_16_16.png";
@@ -34,6 +36,8 @@ namespace Math
         void Draw(Graphics::Window& window);
 
         void Move(double dt);
+
+        MoleculeType GetType() const { return type_; }
 
         bool operator ==(const Molecule& other);
 
