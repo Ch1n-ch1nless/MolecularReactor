@@ -2,6 +2,7 @@
 #define MOLECULAR_REACTOR_MATH_TOOLS_CHEMISTRY_REACTIONS_HPP
 
 #include "molecule.hpp"
+#include "custom_molecules.hpp"
 #include <vector>
 
 namespace Math

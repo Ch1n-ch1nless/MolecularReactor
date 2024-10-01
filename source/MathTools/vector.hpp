@@ -47,6 +47,15 @@ namespace Math
             y_ /= len;
         }
 
+        void Rotate(double angle)
+        {
+            double old_x = x_;
+            double old_y = y_;
+
+            x_ = old_x * cos(angle) - old_y * sin(angle);
+            y_ = old_y * cos(angle) + old_x * sin(angle);
+        }
+
         Vector& operator =(const Vector& vec);
 
         Vector& operator +=(const Vector& other);

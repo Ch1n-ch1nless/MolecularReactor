@@ -51,12 +51,19 @@ double Math::PhysicalEngine::CalcPressure(double volume) const
     return 2.0 * sum_energy / (3.0 * volume);
 }
 
+
+
 void Math::PhysicalEngine::CollideMolecules()
 {
     for (std::size_t i = 1; i < (*molecule_array_).size(); ++i)
     {
         for (std::size_t j = 0; j < i; ++j)
         {
+            if ((*molecule_array_)[i] == nullptr || (*molecule_array_)[j] == nullptr)
+            {
+                continue;
+            }
+
             if (*((*molecule_array_)[i]) == *((*molecule_array_)[j]))
             {
                 double sum_energy = (*molecule_array_)[i]->GetEnergy() + (*molecule_array_)[j]->GetEnergy();
@@ -68,6 +75,15 @@ void Math::PhysicalEngine::CollideMolecules()
                     chemistry_engine_->React(molecule_array_, i, j);
                 }
             }
+        }
+    }
+
+    for (std::size_t i = 0; i < molecule_array_->size(); ++i)
+    {
+        if ((*molecule_array_)[i] == nullptr)
+        {
+            std::swap((*molecule_array_)[i], (*molecule_array_)[molecule_array_->size() - 1]);
+            molecule_array_->pop_back();
         }
     }
 }
