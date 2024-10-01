@@ -19,8 +19,6 @@ View::WindowManager::~WindowManager()
     {
         delete window;
     }
-
-    delete graph_window_;
 }
 
 void View::WindowManager::DrawWindows()

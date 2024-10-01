@@ -12,10 +12,6 @@ View::ButtonManager::ButtonManager(std::vector<BasicButton*>& src_array) :
 
 View::ButtonManager::~ButtonManager()
 {
-    for (View::BasicButton* button : buttons_array_)
-    {
-        delete button;
-    }
 }
 
 void View::ButtonManager::AddButton(BasicButton* new_button)
