@@ -43,9 +43,10 @@ void Math::ChemistryReactSquareSquare(std::vector<Math::Molecule*>* molecule_vec
 {
     Vector position = ((*molecule_vector)[i]->GetPosition() + (*molecule_vector)[j]->GetPosition()) / 2.0;
 
-    double massa1    = (*molecule_vector)[i]->GetMassa();
+    double massa1   = (*molecule_vector)[i]->GetMassa();
+    double massa2   = (*molecule_vector)[j]->GetMassa();
 
-    double massa2    = (*molecule_vector)[j]->GetMassa();
+    double radius   = (*molecule_vector)[i]->GetRadius();
 
     (*molecule_vector)[i] = nullptr;
     (*molecule_vector)[j] = nullptr;
@@ -54,10 +55,11 @@ void Math::ChemistryReactSquareSquare(std::vector<Math::Molecule*>* molecule_vec
 
     for (double index = 0; index < massa1 + massa2; index += 64.0)
     {
-        Vector new_position = position;
-        new_position.Rotate(M_PI * index / (180.0 * (massa1 + massa2) ));
-        BlueCircleMolecule* new_ptr = new BlueCircleMolecule(new_position);
-        printf("BOOM!\n");
+        Vector new_position(0.0, 2.0 * radius);
+        new_position.Rotate(2 * M_PI * index / (massa1 + massa2));
+        Vector new_speed = new_position / 2.0;
+        new_position += position;
+        BlueCircleMolecule* new_ptr = new BlueCircleMolecule(new_position, new_speed);
         molecule_vector->push_back(new_ptr);
     }
 }
