@@ -68,6 +68,10 @@ const Vector& Molecule::GetPosition() const
     return pos_;
 }
 
+void Molecule::SetPosition(const Vector& new_position)
+{
+    pos_ = new_position;
+}
 
 bool Molecule::operator ==(const Molecule& other)
 {

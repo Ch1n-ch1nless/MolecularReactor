@@ -17,7 +17,7 @@ namespace View
          AddBlueCircleButton(Math::MolecularManager* manager_ptr, const Math::Vector& top_left_corner);
         ~AddBlueCircleButton();
 
-        void Act();
+        void Act() override;
     };
 
     class AddRedSquareButton : public BasicButton
@@ -29,7 +29,7 @@ namespace View
          AddRedSquareButton(Math::MolecularManager* manager_ptr, const Math::Vector& top_left_corner);
         ~AddRedSquareButton();
 
-        void Act();
+        void Act() override;
     };
 }
 

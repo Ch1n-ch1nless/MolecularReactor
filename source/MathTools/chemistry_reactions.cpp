@@ -3,7 +3,6 @@
 
 void Math::ChemistryReactCircleCircle(std::vector<Math::Molecule*>* molecule_vector, std::size_t i, std::size_t j)
 {
-    //printf("Circle & circle\n");
     return;
 }
 
@@ -19,8 +18,6 @@ void Math::ChemistryReactCircleSquare(std::vector<Math::Molecule*>* molecule_vec
     (*molecule_vector)[j]->SetVelocity((massa1 * velocity1 + massa2 * velocity2) / (massa1 + massa2));
 
     (*molecule_vector)[i] = nullptr;
-
-    //printf("Circle & square\n");
 }
 
 void Math::ChemistryReactSquareCircle(std::vector<Math::Molecule*>* molecule_vector, std::size_t i, std::size_t j)
@@ -35,8 +32,6 @@ void Math::ChemistryReactSquareCircle(std::vector<Math::Molecule*>* molecule_vec
     (*molecule_vector)[i]->SetVelocity((massa1 * velocity1 + massa2 * velocity2) / (massa1 + massa2));
 
     (*molecule_vector)[j] = nullptr;
-
-    //printf("Square & circle\n");
 }
 
 void Math::ChemistryReactSquareSquare(std::vector<Math::Molecule*>* molecule_vector, std::size_t i, std::size_t j)
@@ -50,8 +45,6 @@ void Math::ChemistryReactSquareSquare(std::vector<Math::Molecule*>* molecule_vec
 
     (*molecule_vector)[i] = nullptr;
     (*molecule_vector)[j] = nullptr;
-    
-    //printf("Square & square\n");
 
     for (double index = 0; index < massa1 + massa2; index += 64.0)
     {

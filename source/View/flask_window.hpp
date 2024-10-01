@@ -16,7 +16,7 @@ namespace View
          FlaskWindow(const std::vector<Math::Molecule*>* molecules_array, const char* const * const molecule_textures);
         ~FlaskWindow();
 
-        void Draw(Graphics::Window& window);
+        void Draw(Graphics::Window& window) override;
 
         void UpdateData(const std::vector<Math::Molecule*>* new_data);
     };

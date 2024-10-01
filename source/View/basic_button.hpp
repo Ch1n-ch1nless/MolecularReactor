@@ -31,7 +31,7 @@ namespace View
 
         virtual void Act() = 0;
 
-        void Draw(Graphics::Window& window);
+        void Draw(Graphics::Window& window) override;
 
         bool IsMouseOnButton(const Graphics::Mouse& mouse);
 

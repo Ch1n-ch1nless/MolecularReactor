@@ -36,6 +36,7 @@ namespace Math
         void          SetVelocity(const Vector& new_velocity);
 
         const Vector& GetPosition() const;
+        void          SetPosition(const Vector& new_position);
 
         bool operator ==(const Molecule& other);
 
