@@ -42,6 +42,22 @@ void MolecularManager::AddMolecule(Molecule* new_molecule)
     molecule_list_.push_back(new_molecule);
 }
 
+void MolecularManager::RemoveMolecule(const MoleculeType type)
+{
+    if (molecule_list_.empty()) return;
+
+    for (int i = static_cast<int>(molecule_list_.size()) - 1; i >= 0; --i)
+    {
+        Math::MoleculeType cur_type = molecule_list_[i]->GetType();
+        if (cur_type == type)
+        {
+            std::swap(molecule_list_[i], molecule_list_[molecule_list_.size()-1]);
+            molecule_list_.pop_back();
+            break;
+        }
+    }
+}
+
 static double GetTime(long long& old_time)
 {
     auto now = std::chrono::system_clock::now();

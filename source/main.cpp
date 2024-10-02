@@ -15,11 +15,15 @@ int main()
 
     Control::Controller     model_controller(&window_manager, &button_manager, &gas_model, Math::TEXTURE_FILES);
 
-    View::AddBlueCircleButton* blue_button = new View::AddBlueCircleButton(&gas_model, {900, 100});
-    View::AddRedSquareButton*  red_button  = new View::AddRedSquareButton(&gas_model, {1000, 100});
+    View::AddBlueCircleButton*      add_blue_button     = new View::AddBlueCircleButton(&gas_model, {900, 100});
+    View::AddRedSquareButton*       add_red_button      = new View::AddRedSquareButton(&gas_model, {1000, 100});
+    View::DeleteBlueCircleButton*   delete_blue_button  = new View::DeleteBlueCircleButton(&gas_model, {900, 200});
+    View::DeleteRedSquareButton*    delete_red_button   = new View::DeleteRedSquareButton(&gas_model, {1000, 200});
 
-    model_controller.AddNewButton(blue_button);
-    model_controller.AddNewButton(red_button);
+    model_controller.AddNewButton(add_blue_button);
+    model_controller.AddNewButton(add_red_button);
+    model_controller.AddNewButton(delete_blue_button);
+    model_controller.AddNewButton(delete_red_button);
 
     while (window.IsOpen())
     {

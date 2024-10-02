@@ -26,6 +26,8 @@ namespace Math
         void CreateMolecule(const MoleculeType type, const Vector& velocity, const double massa);
         
         void AddMolecule(Molecule* molecule);
+
+        void RemoveMolecule(const MoleculeType type);
         
         void LaunchPhysicalEngine(Walls& walls);
 

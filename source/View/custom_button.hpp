@@ -31,6 +31,30 @@ namespace View
 
         void Act() override;
     };
+
+    class DeleteBlueCircleButton : public BasicButton
+    {
+    private:
+        Math::MolecularManager* manager_ptr_;
+    
+    public:
+         DeleteBlueCircleButton(Math::MolecularManager* manager_ptr, const Math::Vector& top_left_corner);
+        ~DeleteBlueCircleButton();
+
+        void Act() override;
+    };
+
+    class DeleteRedSquareButton : public BasicButton
+    {
+    private:
+        Math::MolecularManager* manager_ptr_;
+
+    public:
+         DeleteRedSquareButton(Math::MolecularManager* manager_ptr, const Math::Vector& top_left_corner);
+        ~DeleteRedSquareButton();
+
+        void Act() override;
+    };
 }
 
 #endif //MOLECULAR_REACTOR_VIEW_CUSTOM_BUTTONS_HPP
