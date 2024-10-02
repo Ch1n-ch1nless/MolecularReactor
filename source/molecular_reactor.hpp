@@ -6,3 +6,4 @@
 #include "View/button_manager.hpp"
 #include "View/custom_button.hpp"
 #include "View/flask_window.hpp"
+#include "Controller/controller.hpp"

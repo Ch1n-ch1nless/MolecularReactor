@@ -13,17 +13,13 @@ int main()
     Math::MolecularManager  gas_model({400.0, 400.0});
     View::ButtonManager     button_manager = {};
 
+    Control::Controller     model_controller(&window_manager, &button_manager, &gas_model, Math::TEXTURE_FILES);
+
     View::AddBlueCircleButton* blue_button = new View::AddBlueCircleButton(&gas_model, {900, 100});
     View::AddRedSquareButton*  red_button  = new View::AddRedSquareButton(&gas_model, {1000, 100});
 
-    button_manager.AddButton(blue_button);
-    button_manager.AddButton(red_button);
-
-    window_manager.AddWindow(blue_button);
-    window_manager.AddWindow(red_button);
-
-    View::FlaskWindow* flask_window = new View::FlaskWindow(gas_model.GetUpdatedMoleculeData(), Math::TEXTURE_FILES);
-    window_manager.AddWindow(flask_window);
+    model_controller.AddNewButton(blue_button);
+    model_controller.AddNewButton(red_button);
 
     while (window.IsOpen())
     {
@@ -40,12 +36,11 @@ int main()
             }
         }
 
-        button_manager.ManageEvents(event, mouse);
+        model_controller.ManageEvents(event, mouse);
 
-        gas_model.LaunchPhysicalEngine(walls);
-        flask_window->UpdateData(gas_model.GetUpdatedMoleculeData());
+        model_controller.LaunchPhysicalEngine(walls);
 
-        window_manager.DrawWindows();
+        model_controller.DrawWindows();
 
         window.Display();
         window.Clear();

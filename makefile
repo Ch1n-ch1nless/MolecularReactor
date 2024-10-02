@@ -23,6 +23,9 @@ MAIN_OBJ = ./object/main.o
 VIEW_SRC_DIR = ./source/View/
 VIEW_OBJ_DIR = ./object/View/
 
+CONTROL_SRC_DIR = ./source/Controller/
+CONTROL_OBJ_DIR = ./object/Controller/
+
 GRAPHICS_SRC = $(wildcard $(GRAPHICS_SRC_DIR)*.cpp)
 GRAPHICS_OBJ = $(patsubst $(GRAPHICS_SRC_DIR)%.cpp, $(GRAPHICS_OBJ_DIR)%.o, $(GRAPHICS_SRC))
 
@@ -32,10 +35,13 @@ MATH_TOOLS_OBJ = $(patsubst $(MATH_TOOLS_SRC_DIR)%.cpp, $(MATH_TOOLS_OBJ_DIR)%.o
 VIEW_SRC = $(wildcard $(VIEW_SRC_DIR)*.cpp)
 VIEW_OBJ = $(patsubst $(VIEW_SRC_DIR)%.cpp, $(VIEW_OBJ_DIR)%.o, $(VIEW_SRC))
 
+CONTROL_SRC = $(wildcard $(CONTROL_SRC_DIR)*.cpp)
+CONTROL_OBJ = $(patsubst $(CONTROL_SRC_DIR)%.cpp, $(CONTROL_OBJ_DIR)%.o, $(CONTROL_SRC))
+
 all: link
 
-link: $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) ./object/main.o
-	$(CC) ./object/main.o $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) -o gas_model.out -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+link: $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) $(MAIN_OBJ) $(CONTROL_OBJ)
+	$(CC) $(MAIN_OBJ) $(GRAPHICS_OBJ) $(VIEW_OBJ) $(MATH_TOOLS_OBJ) $(CONTROL_OBJ) -o gas_model.out -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 $(GRAPHICS_OBJ_DIR)%.o : $(GRAPHICS_SRC_DIR)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -49,5 +55,8 @@ $(VIEW_OBJ_DIR)%.o : $(VIEW_SRC_DIR)%.cpp
 $(MAIN_OBJ) : $(MAIN_SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(CONTROL_OBJ) : $(CONTROL_SRC)
+	$(CC) $(CFLAGS) -c $< -o $@
+ 
 clean:
-	rm $(GRAPHICS_OBJ) $(MATH_TOOLS_OBJ) $(VIEW_OBJ) $(MAIN_OBJ)
+	rm $(GRAPHICS_OBJ) $(MATH_TOOLS_OBJ) $(VIEW_OBJ) $(MAIN_OBJ) $(CONTROL_OBJ)
